@@ -8,12 +8,10 @@ import {
   Menu,
   LayoutDashboard, 
   Briefcase, 
-  MessageSquare, 
   Clock,
   CreditCard,
   Users,
   FileText,
-  Settings,
   PieChart,
   CheckCircle
 } from "lucide-react";
@@ -36,58 +34,47 @@ const navigationItems = [
   },
   {
     title: "Projects",
-    href: "/projects",
+    href: "/dashboard/projects",
     icon: Briefcase,
     roles: ["client", "freelancer", "admin"],
   },
   {
     title: "Contracts",
-    href: "/contracts",
+    href: "/dashboard/contracts",
     icon: FileText,
     roles: ["client", "freelancer", "admin"],
   },
   {
-    title: "Messages",
-    href: "/messages",
-    icon: MessageSquare,
-    roles: ["client", "freelancer", "admin"],
-  },
-  {
     title: "Milestones",
-    href: "/milestones",
+    href: "/dashboard/milestones",
     icon: CheckCircle,
     roles: ["client", "freelancer", "admin"],
   },
   {
     title: "Payments",
-    href: "/payments",
+    href: "/dashboard/payments",
     icon: CreditCard,
     roles: ["client", "freelancer", "admin"],
   },
   {
     title: "Freelancers",
-    href: "/freelancers",
+    href: "/dashboard/freelancers",
     icon: Users,
     roles: ["client", "admin"],
   },
   {
     title: "My Proposals",
-    href: "/proposals",
+    href: "/dashboard/proposals",
     icon: Clock,
     roles: ["freelancer"],
   },
   {
     title: "Analytics",
-    href: "/analytics",
+    href: "/dashboard/analytics",
     icon: PieChart,
     roles: ["client", "freelancer", "admin"],
   },
-  {
-    title: "Settings",
-    href: "/settings",
-    icon: Settings,
-    roles: ["client", "freelancer", "admin"],
-  },
+
 ];
 
 export function Sidebar({ isOpen, setIsOpen, pathname }: SidebarProps) {
@@ -110,9 +97,9 @@ export function Sidebar({ isOpen, setIsOpen, pathname }: SidebarProps) {
       {/* Sidebar */}
       <div
         className={cn(
-          "fixed top-16 bottom-0 left-0 z-40 border-r bg-background transition-all duration-300 ease-in-out flex flex-col",
+          "fixed top-16 bottom-0 left-0 z-30 border-r bg-background transition-all duration-300 ease-in-out flex flex-col",
           isOpen 
-            ? "w-72 shadow-xl" 
+            ? "w-72 shadow-xl lg:translate-x-0" 
             : "w-16 -translate-x-full lg:translate-x-0"
         )}
         aria-hidden={!isOpen && typeof window !== 'undefined' ? window.innerWidth < 1024 : false}
@@ -146,10 +133,10 @@ export function Sidebar({ isOpen, setIsOpen, pathname }: SidebarProps) {
                   onClick={() => setIsOpen(false)}
                 >
                   <Button
-                    variant={pathname === item.href ? "secondary" : "ghost"}
+                    variant={pathname.startsWith(item.href) ? "secondary" : "ghost"}
                     className={cn(
                       "w-full justify-start gap-3 transition-all duration-200",
-                      pathname === item.href
+                      pathname.startsWith(item.href)
                         ? "bg-secondary font-medium"
                         : "font-normal",
                       !isOpen && "px-2"

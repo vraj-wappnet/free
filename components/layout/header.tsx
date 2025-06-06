@@ -23,6 +23,19 @@ export function Header({ setSidebarOpen, sidebarOpen = false }: HeaderProps) {
   return (
     <header className="fixed z-40 top-0 left-0 right-0 h-16 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-all duration-300 ease-in-out">
       <div className="flex h-full items-center px-4 sm:px-6">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="lg:hidden mr-2"
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+        >
+          {sidebarOpen ? (
+            <X className="h-5 w-5" />
+          ) : (
+            <Menu className="h-5 w-5" />
+          )}
+          <span className="sr-only">Toggle sidebar</span>
+        </Button>
         <Link href="/dashboard" className="flex items-center">
           <Briefcase className="h-6 w-6 mr-2" />
           <span className="font-bold text-lg">Lancer</span>
@@ -101,9 +114,7 @@ export function Header({ setSidebarOpen, sidebarOpen = false }: HeaderProps) {
               <DropdownMenuItem asChild>
                 <Link href="/profile">My Profile</Link>
               </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href="/settings">Settings</Link>
-              </DropdownMenuItem>
+              
               <DropdownMenuItem asChild>
                 <Link href="/auth/sign-in">Sign out</Link>
               </DropdownMenuItem>
